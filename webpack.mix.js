@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 require('laravel-mix-workbox');
-require('laravel-mix-merge-manifest');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -46,7 +45,6 @@ mix.js('resources/js/app.js', 'public/js').vue()
 
         skipWaiting: true
         })
-    .mergeManifest()
     .webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {

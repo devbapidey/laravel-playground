@@ -18,7 +18,6 @@
         "@vue/compiler-sfc": "^3.0.5",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
-        "laravel-mix-merge-manifest": "^2.0.0",
         "laravel-mix-workbox": "^0.1.4",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
