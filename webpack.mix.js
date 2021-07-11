@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
-
+require('laravel-mix-workbox');
+require('laravel-mix-merge-manifest');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -16,6 +17,36 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
+    .generateSW({
+        // Cleanup Outdated Caches
+        cleanupOutdatedCaches: true,
+
+        // Do not precache images
+        exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+
+        runtimeCaching: [
+            {
+                // Match any request that ends with .png, .jpg, .jpeg or .svg.
+                urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+
+                // Apply a cache-first strategy.
+                handler: 'CacheFirst',
+
+                options: {
+                    // Use custom cache name
+                    cacheName: 'images',
+
+                    // Only cache 10 images
+                    expiration: {
+                        maxEntries: 10,
+                    },
+                },
+            },
+        ],
+
+        skipWaiting: true
+        })
+    .mergeManifest()
     .webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {
